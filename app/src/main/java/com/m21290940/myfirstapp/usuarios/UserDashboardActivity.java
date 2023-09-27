@@ -1,9 +1,15 @@
 package com.m21290940.myfirstapp.usuarios;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.m21290940.myfirstapp.R;
@@ -14,6 +20,7 @@ public class UserDashboardActivity extends AppCompatActivity {
 
     private UsersRepository ur;
     private Usuario userInfo;
+    private Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,11 +34,16 @@ public class UserDashboardActivity extends AppCompatActivity {
 
         userInfo = ur.getRegisteredUsers().get(user).get(pass);
 
-        ShapeableImageView ivUserImage = findViewById(R.id.ivUserImage);
-        if ( userInfo.getGenero() == 'h' )
-            ivUserImage.setImageResource(R.drawable.human_man);
-        else
-            ivUserImage.setImageResource(R.drawable.human_woman);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ShapeableImageView ivUserFoto = findViewById(R.id.ivUserFoto);
+        if ( userInfo.getGenero() == 'h' ){
+            ivUserFoto.setImageResource(R.drawable.human_man);
+        }
+        else {
+            ivUserFoto.setImageResource(R.drawable.human_woman);
+        }
 
 
         TextView tvUserUsuario = findViewById(R.id.tvUserUsuario);
@@ -43,5 +55,28 @@ public class UserDashboardActivity extends AppCompatActivity {
         tvUserNombre .setText( userInfo.getNombre() );
         tvUserEmail  .setText( userInfo.getEmail() );
         tvUserEdad   .setText( userInfo.getEdad() + " ".concat( getString(R.string.tvUserEdadComplement) ) );
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if ( item.getItemId() == R.id.miBorrar ){
+
+        } else if( item.getItemId() == R.id.miinfo ) {
+            Toast.makeText(this,
+                    "Presionaste botón más información",
+                    Toast.LENGTH_LONG).show();
+        } else if( item.getItemId() == R.id.miSetting ){
+
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

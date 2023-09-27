@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/miBorrar"
+        android:title="Borrar"
+        android:icon="@drawable/icon_delete"
+        app:showAsAction="ifRoom"
+        />
+    <item
+        android:id="@+id/miinfo"
+        android:title="Info"
+        android:icon="@drawable/icon_info"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/miSetting"
+        android:title="Settings"
+        app:showAsAction="never"
+        />
+</menu>
